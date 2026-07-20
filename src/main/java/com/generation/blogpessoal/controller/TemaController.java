@@ -24,7 +24,7 @@ import com.generation.blogpessoal.repository.TemaRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/temas") 
+@RequestMapping("/tema") 
 @CrossOrigin(origins = "*", allowedHeaders = "*") 
 public class TemaController {
 
@@ -51,17 +51,17 @@ public class TemaController {
 		}
     
     @PostMapping
-    public ResponseEntity<Tema> post(@Valid @RequestBody Tema TemaModel) {
-    	TemaModel.setId(null);
-		return ResponseEntity.status(HttpStatus.CREATED).body(TemaRepository.save(TemaModel));
+    public ResponseEntity<Tema> post(@Valid @RequestBody Tema tema) {
+    	tema.setId(null);
+		return ResponseEntity.status(HttpStatus.CREATED).body(TemaRepository.save(tema));
 		
     }
     
     @PutMapping 
-    public ResponseEntity<Tema> put(@Valid @RequestBody Tema TemaModel) {
-    	return TemaRepository.findById(TemaModel.getId())
+    public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
+    	return TemaRepository.findById(tema.getId())
                 .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-                .body(TemaRepository.save(TemaModel)))
+                .body(TemaRepository.save(tema)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
   }
     
