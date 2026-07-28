@@ -54,8 +54,8 @@ public class SecurityConfig {
             )
             
             .exceptionHandling(exceptions -> exceptions
-                    .authenticationEntryPoint((request, response, authException) -> 
-                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, 
+                    .authenticationEntryPoint((request, response, authException) ->
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                             "Não autorizado - Token JWT ausente ou inválido"))
             )
             
