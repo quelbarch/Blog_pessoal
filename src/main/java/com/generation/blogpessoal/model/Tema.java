@@ -30,7 +30,7 @@ public class Tema {
 	@Column(length = 255)
 	private String descricao;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "tema", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties(value = "tema", allowSetters = true)
 	private List<Postagem> postagem;
 	
@@ -56,6 +56,6 @@ public class Tema {
 	}
 
 	public void setPostagem(List<Postagem> postagem) {
-		
+		this.postagem = postagem;
 	}
 }
