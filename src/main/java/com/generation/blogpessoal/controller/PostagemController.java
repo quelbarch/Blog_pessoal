@@ -80,20 +80,18 @@ public class PostagemController {
     }
     	
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O Tema não existe!", null);
-}
-    
-    @PutMapping 
+    }
+
+    @PutMapping
     public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem) {
-        
         if (postagemRepository.existsById(postagem.getId())) {
-            
-            if (temaRepository.existsById(postagem.getTema().getId())) {
+            if (postagem.getTema() != null && temaRepository.existsById(postagem.getTema().getId())) {
                 return ResponseEntity.ok(postagemRepository.save(postagem));
             }
-            
+
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O Tema não existe!", null);
         }
-        
+
         return ResponseEntity.notFound().build();
     }
 
